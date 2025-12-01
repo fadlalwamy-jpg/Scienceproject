@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vitamins Project</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #a3c4f3; /* muted baby blue */
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-weight: 700;
+      color: white;
+    }
+
+    .vitamin-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .vitamin {
+      width: 120px;
+      height: 120px;
+      border: 3px solid white; /* outlines white */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 60px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+      background: transparent;
+      color: transparent;
+    }
+
+    .vitamin.active {
+      background: white;
+      color: #a3c4f3; /* text becomes muted baby blue */
+      transform: scale(1.2);
+    }
+
+    #info {
+      margin-top: 40px;
+      padding: 20px;
+      max-width: 500px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      display: none;
+      color: black;
+    }
+
+    #info h2 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Vitamins</h1>
+
+  <div class="vitamin-container">
+    <div class="vitamin" data-vit="A">A</div>
+    <div class="vitamin" data-vit="B">B</div>
+    <div class="vitamin" data-vit="C">C</div>
+    <div class="vitamin" data-vit="D">D</div>
+    <div class="vitamin" data-vit="E">E</div>
+    <div class="vitamin" data-vit="K">K</div>
+  </div>
+
+  <div id="info"></div>
+
+  <script>
+    const vitaminData = {
+      A: "Vitamin A helps with vision, the immune system, and reproduction.",
+      B: "Vitamin B is actually a group of vitamins that help with energy and brain function.",
+      C: "Vitamin C boosts immunity and is important for skin and tissue repair.",
+      D: "Vitamin D helps the body absorb calcium and is essential for bone health.",
+      E: "Vitamin E is an antioxidant that protects cells from damage.",
+      K: "Vitamin K helps blood clot and supports bone metabolism."
+    };
+
+    const vitamins = document.querySelectorAll('.vitamin');
+    const infoBox = document.getElementById('info');
+
+    vitamins.forEach(vit => {
+      vit.addEventListener('click', () => {
+        vitamins.forEach(v => v.classList.remove('active'));
+
+        vit.classList.add('active');
+
+        const letter = vit.dataset.vit;
+        infoBox.style.display = 'block';
+        infoBox.innerHTML = `<h2>Vitamin ${letter}</h2><p>${vitaminData[letter]}</p>`;
+      });
+    });
+  </script>
+</body>
+</html>
